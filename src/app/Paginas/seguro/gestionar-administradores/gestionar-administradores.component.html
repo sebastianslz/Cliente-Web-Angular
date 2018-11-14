@@ -1,0 +1,212 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../../../../assets/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+                 folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../../../../../assets/dist/css/skins/_all-skins.min.css">
+
+</head>
+
+<section class="content-header">
+  <h1>
+    Gestion de Administradores
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a href="#">
+        <i class="fa fa-dashboard"></i> Inicio</a>
+    </li>
+    <li>
+      <a href="#">Dashboard</a>
+    </li>
+    <li class="active">Gestion de Administradores</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <!--Columna derecha-->
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Datos Administrador</h3>
+        </div>
+        <!--Aqui empieza la informacion basica del usuario-->
+        <form #datosForm="ngForm" role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="Cedula">Cedula</label>
+              <input type="text" [(ngModel)]="persona.cedula" name="cedula" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="Nombre">Nombre</label>
+              <input type="text" [(ngModel)]="persona.nombre" name="nombre" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="Apellido">Apellido</label>
+              <input type="text" [(ngModel)]="persona.apellido" name="apellido" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Fecha de Nacimiento</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="date" [(ngModel)]="persona.fecha_nacimiento" name="fecha" class="form-control pull-right">
+              </div>
+              <!-- /.input group -->
+            </div>
+            <div class="form-group">
+              <label>Telefono</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <input type="text" [(ngModel)]="persona.telefono" name="telefono" class="form-control">
+              </div>
+              <!-- /.input group -->
+            </div>
+            <div class="form-group">
+              <label for="Direccion">Direccion</label>
+              <input type="textarea" [(ngModel)]="persona.direccion" name="direccion" class="form-control">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--Columna izquierda-->
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Datos usuario</h3>
+        </div>
+        <form #datosForm="ngForm" role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="Nombre de usuario">Nombre de usuario</label>
+              <input type="text" [(ngModel)]="usuario.username" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="Contraseña">Contraseña</label>
+              <input type="password" [(ngModel)]="usuario.password" name="password" class="form-control">
+            </div>
+            <div class="box-footer">
+
+              <button (click)="registrar(datosForm)" class="btn btn-primary">Registrar Administrador</button>
+
+              <button (click)="editar(datosForm)" class="btn btn-warning">Editar Administrador</button>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Buscar Administrador</h3>
+        </div>
+        <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
+          <div class="box-body">
+            <div class="form-group">
+              <div>
+                <input [(ngModel)]="persona.cedula" name="cedula" type="text" class="form-control" placeholder="Cedula" required>
+              </div>
+            </div>
+            <div class="col-md-6" style="padding-left: 0">
+              <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--Fin columna izquierda-->
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Lista de Administradores ({{personas.length}})</h3>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">cedula</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Apellido</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Direccion</th>
+              <th scope="col">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of personas">
+              <th scope="row">{{p.cedula}}</th>
+              <td>{{p.nombre}}</td>
+              <td>{{p.apellido}}</td>
+              <td>{{p.telefono}}</td>
+              <td>{{p.direccion}}</td>
+              <td>
+                <button class="btn btn-block btn-danger btn-xs" (click)="eliminar(p)">Eliminar</button>
+                <button class="btn btn-block btn-info btn-xs" (click)="ver(p)">Ver</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+
+
+
+
+  </div>
+
+
+</section>
+<!-- jQuery 3 -->
+<script src="../../../../../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../../../../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- date-range-picker -->
+<script src="../../../../../assets/bower_components/moment/min/moment.min.js"></script>
+<script src="../../../../../assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../../../../assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../../../../assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="../../../../../assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+<script>
+  $(function () {
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+  })
+</script>
+
+</html>
+
+
+

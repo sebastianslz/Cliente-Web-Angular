@@ -1,0 +1,377 @@
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="../../../../../assets/bower_components/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" href="../../../../../assets/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+                 folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../../../../../assets/dist/css/skins/_all-skins.min.css">
+
+</head>
+
+<section class="content-header">
+  <h1>
+    Gestion de Empleados
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a href="#">
+        <i class="fa fa-dashboard"></i> Inicio</a>
+    </li>
+    <li>
+      <a href="#">Dashboard</a>
+    </li>
+    <li class="active">Gestion de Empleados</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+      
+    <!--Columna derecha-->
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Datos Empleado</h3>
+        </div>
+        <!--Aqui empieza la informacion del empleado-->
+        <form #datosForm="ngForm" class="contact_form">
+          <div class="box-body">
+            <div class="form-group">
+              <label>Nombre:</label>
+              <input type="text" [(ngModel)]="empleado.usuario.persona.nombre" name="nombre" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Apellido:</label>
+              <input type="text" [(ngModel)]="empleado.usuario.persona.apellido" name="apellido" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Cedula:</label>
+              <input type="text" [(ngModel)]="empleado.usuario.persona.cedula" name="cedula" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Telefono</label>
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="fa fa-phone"></i>
+                </div>
+                <input type="text" [(ngModel)]="empleado.usuario.persona.telefono" name="telefono" class="form-control">
+              </div>
+              <!-- /.input group -->
+            </div>
+            <div class="form-group">
+              <label>Fecha de Nacimiento</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="date" [(ngModel)]="empleado.usuario.persona.fecha_nacimiento" name="fecha" class="form-control pull-right">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Direccion:</label>
+              <input type="text" [(ngModel)]="empleado.usuario.persona.direccion" name="direccion" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Cargo</label>
+              <select [(ngModel)]="empleado.cargo.id" name="cargo" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                tabindex="-1" aria-hidden="true">
+                <option *ngFor="let c of cargos" value="{{c.id}}">{{c.nombre}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Salario</label>
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <i class="fa fa-dollar"></i>
+                </span>
+                <input type="number" [(ngModel)]="empleado.salario" name="salario" class="form-control">
+              </div>
+            </div>
+            <!--Aqui acaba la innformacion basica del usuario-->
+            <!--Aqui se coloca los datos de usuario-->
+            <div class="box-header with-border">
+              <h3 class="box-title">Datos usuario</h3>
+            </div>
+            <div class="form-group">
+              <label for="Nombreusuario">Nombre de usuario:</label>
+              <input type="text" [(ngModel)]="empleado.usuario.username" name="username" class="form-control" autocomplete="off">
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input type="password" [(ngModel)]="empleado.usuario.password" name="password" class="form-control" autocomplete="off">
+            </div>
+            <div class="box-footer">
+
+              <button type="submit" (click)="registrar(datosForm)" class="btn btn-primary">Registrar Empleado</button>
+
+              <button type="submit" (click)="editar(datosForm)" class="btn btn-warning">Editar Empleado</button>
+
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+      <!--Aqui empieza la tabla de empleado-->
+      
+    </div>
+    <div class="col-md-6">
+        <div class="box box-success">
+          <div class="box-header with-border">
+            <h3 class="box-title">Lista de Empleados ({{empleados.length}})</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Salario</th>
+                    <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let e of empleados">
+                      <th scope="row">{{e.usuario.persona.cedula}}</th>
+                      <td>{{e.usuario.persona.nombre}}</td>
+                      <td>{{e.usuario.persona.apellido}}</td>
+                      <td>{{e.usuario.persona.telefono}}</td>
+                      <td>{{e.cargo.nombre}}</td>
+                      <td>{{e.salario}}</td>
+                      <td>
+                        <button class="btn btn-block btn-danger btn-xs" (click)="eliminar(e)">Eliminar</button>
+                        <button class="btn btn-block btn-info btn-xs" (click)="ver(e)">Ver</button>
+                        
+                      </td>
+                    </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    
+
+<!--Columna izquierda-->
+    <div class="col-md-6">
+        <div class="box box-success">
+          <div class="box-header with-border">
+            <h3 class="box-title">Buscar Empleado</h3>
+          </div>
+          <form (ngSubmit)="fbuscar($event)" class="contact_form" id="contact_form">
+            <div class="box-body">
+              <div class="form-group">
+                <div>
+                  <input [(ngModel)]="empleado.usuario.persona.cedula" name="cedula" type="text" class="form-control" placeholder="Cedula" required>
+                </div>
+              </div>
+              <div class="col-md-6" style="padding-left: 0">
+                <button style="height: 48px;margin: 0;width: 100%" class="contact_button button">Buscar</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    
+    <!--Formacion academica del empleado-->
+   <!-- <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Formacion Academica</h3>
+        </div>
+        <form #formacionesForm="ngForm" method="post" class="contact_form">
+          <div class="box-body">
+            <div class="form-group">
+              <label>Institucion</label>
+              <input type="text" [(ngModel)]="formacion.institucion" name="institucion" id="institucion" class="form-control" required="required">
+            </div>
+            <div class="form-group">
+              <label>Titulo Obtenido</label>
+              <input type="text" [(ngModel)]="formacion.titulo" name="titulo" id="titulo" class="form-control" required="required">
+            </div>
+            <div class="form-group">
+              <label for="certificacion">Certificacion:</label>
+              <input type="file" [(ngModel)]="formacion.file_certificacion" name="certificacion" class="form-control" required="required"
+                accept="application/pdf">
+            </div>
+
+            <div class="box-footer">
+
+              <button (click)="registrarFormacion(formacionesForm)" class="btn btn-primary">Registrar Formacion</button>
+              <button (click)="editarFormacion(formacionesForm)" class="btn btn-warning">Editar Formacion</button>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    -->
+    <!--Fin formacion academica-->
+    <!--
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Formacion del Empleado ({{formaciones.length}})</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Institucion Graduacion</th>
+                <th scope="col">Titulo Obtenido</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let f of formaciones">
+                <td>{{f.institucion}}</td>
+                <td>{{f.titulo}}</td>
+                <td>
+                  <button (click)="verFormacion(f)" class="btn btn-block btn-info btn-xs">Ver</button>
+                  <button (click)="eliminarFormacion(f)" class="btn btn-block btn-danger btn-xs">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  -->
+  <!--
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Experiencia Laboral</h3>
+        </div>
+        <form #experienciaForm="ngForm" class="contact_form">
+          <div class="box-body">
+            <div class="form-group">
+              <label for="l1">Empresa donde Laboro</label>
+              <input type="text" [(ngModel)]="experiencia.empresa" name="empresa" id="l1" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="l2">Direccion de la Empresa</label>
+              <input type="text" [(ngModel)]="experiencia.empresa_direccion" name="empresa_direccion" id="l2" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="l3">Telefono de la Empresa</label>
+              <input type="phone" [(ngModel)]="experiencia.empresa_telefono" name="empresa_telefono" id="l3" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="l4">Cargo dentro de la Empresa:</label>
+              <input type="text" [(ngModel)]="experiencia.cargo" name="cargo" id="l4" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="l5">Fecha de Ingreso</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="date" [(ngModel)]="experiencia.fecha_inicio" name="fecha_inicio" id="l5" class="form-control pull-right">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Fecha de Salida</label>
+              <div class="input-group date">
+                <div class="input-group-addon">
+                  <i class="fa fa-calendar"></i>
+                </div>
+                <input type="date" [(ngModel)]="experiencia.fecha_fin" name="fecha_fin" id="l6" class="form-control pull-right">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="certificacion">Certificacion:</label>
+              <input type="file" (change)="asignarArchivo($event,2)" name="certificacion" class="form-control" accept="application/pdf">
+            </div>
+            <div class="box-footer">
+
+              <button (click)="registrarExperiencia(experienciaForm)" class="btn btn-primary">Registrar Experiencia</button>
+              <button (click)="editarExperiencia(experienciaForm)" class="btn btn-warning">Editar Experiencia</button>
+
+            </div>
+
+
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  -->
+    <!--Fin registro experiencia-->
+    <!--
+    <div class="col-md-6">
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title"> Experiencias del Empleado ({{experiencias.length}})</h3>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Empresa</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Cargo</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of experiencias">
+              <th>{{e.empresa}}</th>
+              <td>{{e.empresa_telefono}}</td>
+              <td>{{e.cargo}}</td>
+              <td>
+                <button (click)="verExperiencia(e)" class="btn btn-block btn-info btn-xs">Ver </button>
+                <button (click)="eliminarExperiencia(e)" class="btn btn-block btn-danger btn-xs" style="margin-left: 10px">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  -->
+  </div>
+
+</section>
+<!-- jQuery 3 -->
+<script src="../../../../../assets/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../../../../assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- date-range-picker -->
+<script src="../../../../../assets/bower_components/moment/min/moment.min.js"></script>
+<script src="../../../../../assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap datepicker -->
+<script src="../../../../../assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../../../../assets/bower_components/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="../../../../../assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
+
+<script>
+  $(function () {
+    $('#datepicker').datepicker({
+      autoclose: true
+    })
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+  })
+</script>
+
+</html>
+
+

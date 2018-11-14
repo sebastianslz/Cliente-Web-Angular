@@ -1,0 +1,30 @@
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <!-- Contact Form -->
+      <div class="col-lg-12">
+      <div class="col-lg-6" style="margin:0 auto">
+        <div class="section_title"> Actualizar datos de mi cuenta </div>  
+        <div class="section_subtitle">Ingrese  los datos para actualizar tu cuenta</div>
+        <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+        <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div><br>
+        <div class="contact_form_container">
+          <form #datosForm="ngForm" class="contact_form" id="contact_form">
+            <div class="section_subtitle"> Tus Datos personales </div>
+            <div><input type="text" [(ngModel)]="usuario.persona.cedula" name="cedula" class="contact_input" placeholder="Cedula" required="required"></div>
+            <div><input type="text" [(ngModel)]="usuario.persona.nombre" name="nombre" class="contact_input" placeholder="Nombre" required="required"></div>
+            <div><input type="text" [(ngModel)]="usuario.persona.apellido" name="apellido" class="contact_input" placeholder="Apellido" required="required"></div>
+            <div><input type="date" [(ngModel)]="usuario.persona.fecha_nacimiento" name="fecha" class="contact_input" placeholder="Fecha de nacimiento" required="required" max="2000-01-01" ></div>
+            <div><input type="tel"  [(ngModel)]="usuario.persona.telefono" name="telefono" class="contact_input" placeholder="Telefono (123-456-7890)" required="required" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"></div>
+            <div><input type="text" [(ngModel)]="usuario.persona.direccion" name="direccion" class="contact_input" placeholder="Direccion" required="required"></div>
+            <div class="section_subtitle"> Tus Datos de acceso </div>
+            <div><input type="tel"  [(ngModel)]="usuario.username" name="username" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
+            <div><input type="text" [(ngModel)]="usuario.password" name="password" class="contact_input" placeholder="Contraseña" required="required"></div>
+            <button (click)="editar(datosForm)" style="width: 100%" class="contact_button button">Actualizar mi cuenta</button>
+          </form>
+        </div>
+        </div>
+       </div>
+     </div>
+   </div>
+</div>

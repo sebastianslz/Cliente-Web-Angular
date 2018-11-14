@@ -1,0 +1,101 @@
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      <div class="row">
+      <!-- Tabla de Visitas a inmuebles -->
+      <div class="col-lg-8">
+          <br>
+          <div class="section_subtitle" style="margin-left: -130px"> Lista de visitas a asignar: ({{visitasFinales.length}})</div><br>
+          <div style="overflow: auto; border: 1px solid #ccc; height: 300px;margin-left: -130px;width: 720px">
+          <table class="table" style="width: 50%">
+              <thead>
+                <tr>
+                  <th scope="col">Fecha de visita</th>
+                  <th scope="col">Hora</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Matricula</th>
+                  <th scope="col">C.C</th>
+                  <th scope="col">Cliente</th>
+                  <th scope="col">Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let v of visitasFinales">
+                  <th scope="row">{{v.fecha}}</th>
+                  <td >{{v.hora_visita}}</td>
+                  <td >{{v.estado}}</td>
+                  <td>{{v.inmueble.numero_matricula}}</td>
+                  <td>{{v.cliente.cedula}}</td>
+                  <td>{{v.cliente.nombre}}</td>
+                  <td style="width: 1000px">
+                    <button style="background-color: lightseagreen" class="btn" (click)="seleccionarVisita(v)">Seleccionar</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+
+             <!-- Lista de empleados -->
+             <div class="section_subtitle" style="margin-left: 650px;margin-top: -350px"> Lista de empleados a asignar: ({{empleados.length}})</div><br>
+             <div style="overflow: auto; border: 1px solid #ccc; height: 300px;width: 550px;margin-left: 650px;margin-top: -5px">
+             <table class="table" style="width: 50%">
+                 <thead>
+                   <tr>
+                     <th scope="col">Documento</th>
+                     <th scope="col">Nombre</th>
+                     <th scope="col">Apellido</th>
+                     <th scope="col">Cargo</th>
+                     <th scope="col">Accion</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr *ngFor="let e of empleados">
+                     <th scope="row">{{e.usuario.persona.cedula}}</th>
+                     <td >{{e.usuario.persona.nombre}}</td>
+                     <td >{{e.usuario.persona.apellido}}</td>
+                     <td>{{e.cargo.nombre}}</td>
+                     <td>
+                       <button style="background-color: lightseagreen" class="btn" (click)="seleccionEmpleado(e)">Seleccionar</button>
+                     </td>
+                   </tr>
+                 </tbody>
+               </table>   
+              </div>
+            </div>
+
+            <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+            <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2"><div id="close" title="Cerrar">×</div>{{msj}}</div>
+     
+              <div class="sidebar_search" style="margin-top:100px;margin-left:0">
+                <div class="sidebar_search_title">Asignar Visita</div>
+                <div class="sidebar_search_form_container">
+                  <form #datosForm="ngForm" class="contact_form" id="contact_form">
+                  
+                     <div><textarea  disabled="true" style="background-color: white;height:200px;margin-bottom: 15px" type="text" [(ngModel)]="visitaSeleccionada.mensaje" name="mensaje" class="contact_input" placeholder="Mensaje del cliente"></textarea></div>
+                   
+                    <div>
+                      <div style="margin-left: 10px;margin-top: -30px"><h5>Numero de visita</h5></div>
+                      <div style="margin-left: 360px;margin-top: -25px"><h5>Cliente</h5></div>
+                      <div style="margin-left: 710px;margin-top: -25px"><h5>Empleado</h5></div>
+                    </div>
+
+                    <div style="margin-top: -65px"><input type="text" style="background-color:white; width:300px;margin-left: 350px;margin-top: 60px" [(ngModel)]="nombreCliente" name="cliente" class="contact_input" placeholder="Seleccione..."></div>	
+                    <div style="margin-top: -65px"><input type="text" style="background-color:white; width:300px;margin-left: 700px" [(ngModel)]="nombreEmpleado" name="empleado" class="contact_input" placeholder="Seleccione..."></div>	
+                    <div style="margin-top: -65px"><input type="text" style="background-color:white; width:300px" [(ngModel)]="numeroVisita" name="numeroVisita" class="contact_input" placeholder="Seleccione..."></div>	
+
+                   <button class="sidebar_search_button search_form_button"
+                    style="width:400px;margin-top:30px!important" (click)="asignarVisita()">Asignar Empleeado</button>
+                   
+                  </form>
+                </div>
+              </div>
+
+      
+      </div>
+      </div>
+    </div>
+
+      </div>
+
+   </div>

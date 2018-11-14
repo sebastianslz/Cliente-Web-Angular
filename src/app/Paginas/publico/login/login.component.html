@@ -1,0 +1,23 @@
+	<div class="contact">
+      <div class="container">
+        <div class="row">
+          <!-- Contact Form -->
+          <div class="col-lg-12">
+          <div class="col-lg-6" style="margin:0 auto">
+            <div class="section_title">Iniciar Sesion</div>
+            <div class="section_subtitle">Ingresa tus datos para acceder a la aplicacion</div>
+            <div class="aviso alert alert-danger" style="margin: 15px 0 0 0;" *ngIf="show == 1"><div id="close" title="Cerrar">x</div>{{msj}}</div>
+            <div class="aviso alert alert-success" style="margin: 15px 0 0 0;" *ngIf="show == 2"><div id="close" title="Cerrar">x</div>{{msj}}</div>
+            <br>
+            <div class="contact_form_container">
+              <form (submit)="login($event)" class="contact_form" id="contact_form">
+                <div><input [(ngModel)]="usuario.username" name="username" type="text" class="contact_input" placeholder="Nombre de usuario" required="required"></div>
+                <div><input [(ngModel)]="usuario.password" name="password" type="password" class="contact_input" placeholder="Contraseña" required="required"></div>
+                <button class="contact_button button" style="width: 100%">Iniciar Sesion</button>
+              </form>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>

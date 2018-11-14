@@ -1,0 +1,208 @@
+	<!-- Intro -->
+
+	<div class="intro">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="intro_content d-flex flex-lg-row flex-column align-items-start justify-content-start">
+						<div class="intro_title_container">
+							<div class="intro_title">{{inmueble.tipo.nombre}} sector {{getZona(inmueble.zona)}} en {{inmueble.ciudad.nombre}}</div>
+							<div class="intro_tags">
+								<ul>
+									<li><a href='/?objeto={"tipoAV":"{{inmueble.tipoAV}}"}'>{{getTipoAV(inmueble.tipoAV)}}</a></li>
+									<li><a href='/?objeto={"tipo":"{{inmueble.tipo.id}}"}'>{{inmueble.tipo.nombre}}</a></li>
+									<li><a href='/?objeto={"ciudad":"{{inmueble.ciudad.id}}"}'>{{inmueble.ciudad.nombre}}</a></li>
+									<li><a href='/?objeto={"zona":"{{inmueble.zona}}"}'>{{getZona(inmueble.zona)}}</a></li>
+									<li><a href='/?objeto={"anoconstruccion":"{{inmueble.anoconstruccion}}"}'>{{inmueble.anoconstruccion}}</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="intro_price_container ml-lg-auto d-flex flex-column align-items-start justify-content-center">
+							<div>En {{getTipoAV(inmueble.tipoAV)}}</div>
+							<div class="intro_price">$ {{addComa(inmueble.valor)}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="intro_slider_container">
+
+			<!-- Intro Slider -->
+			<div class="owl-carousel owl-theme intro_slider">
+				<!-- Slide -->
+				<div  *ngFor="let f of fotos" class="owl-item" style="margin: 0 auto;text-align: center">
+          <img src="template/images/{{f.nombre}}">
+        </div>
+			</div>
+
+			<!-- Intro Slider Nav -->
+			<div class="intro_slider_nav_container">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="intro_slider_nav_content d-flex flex-row align-items-start justify-content-end">
+								<div class="intro_slider_nav intro_slider_prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
+								<div class="intro_slider_nav intro_slider_next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Property -->
+
+	<div class="property">
+		<div class="container">
+			<div class="row">
+				
+				<!-- Sidebar -->
+
+				<div class="col-lg-4">
+					<div class="sidebar">
+						<div class="sidebar_search">
+							<div class="sidebar_search_title">Especificaciones</div>
+							<div class="sidebar_search_form_container">
+								<form action="#" class="sidebar_search_form" id="sidebar_search_form">
+									<div class="sidebar_search_select">Ascensor: <span>{{siNo(inmueble.ascensor)}}</span></div>
+									<div class="sidebar_search_select">Canchas Deportivas: <span>{{siNo(inmueble.canchas_deportivas)}}</span></div>
+									<div class="sidebar_search_select">Zonas Humedas: <span>{{siNo(inmueble.zonas_humedas)}}</span></div>
+									<div class="sidebar_search_select">Zona Infantil: <span>{{siNo(inmueble.zona_inantil)}}</span></div>
+									<div class="sidebar_search_select">Jardines: <span>{{siNo(inmueble.jardines)}}</span></div>
+									<div class="sidebar_search_select">Transporte Publico Cercano: <span>{{siNo(inmueble.transporte_publico_cercano)}}</span></div>
+									<div class="sidebar_search_select">Precio Negociable: <span>{{siNo(inmueble.precio_negociable)}}</span></div>
+									<div class="sidebar_search_select">Zona de Ropas: <span>{{siNo(inmueble.zona_ropas)}}</span></div>
+									<div class="sidebar_search_select">Parqueadero: <span>{{siNo(inmueble.parqueadero)}}</span></div>
+									<div class="sidebar_search_select">Depositov: <span>{{siNo(inmueble.deposito)}}</span></div>
+									<div class="sidebar_search_select">Estudio: <span>{{siNo(inmueble.estudio)}}</span></div>
+									<div class="sidebar_search_select">Cuarto de Servicio: <span>{{siNo(inmueble.cuarto_servicio)}}</span></div>
+									<div class="sidebar_search_select">Chimenea: <span>{{siNo(inmueble.chimenea)}}</span></div>
+									<div class="sidebar_search_select">Cocina Abierta/Cerrada: <span>{{siNo(inmueble.cocinaAC)}}</span></div>
+									<div class="sidebar_search_select">Comedor Independiente: <span>{{siNo(inmueble.comedorIndependiente)}}</span></div>
+									<div class="sidebar_search_select">Vista Exterior / Interior: <span>{{siNo(inmueble.vista_exterior_interior)}}</span></div>
+									<button class="sidebar_search_button search_form_button" style="width: 100%;margin-top:20px!important">Reservar Visita</button>
+								</form>
+							</div>
+						</div>
+
+						<!-- Realtor -->
+						<div class="sidebar_realtor">
+							<div class="sidebar_realtor_image"><img src="template/images/sidebar_realtor.jpg" alt=""></div>
+							<div class="sidebar_realtor_body text-center">
+								<div class="sidebar_realtor_title"><a href="#">Maria Williams</a></div>
+								<div class="sidebar_realtor_subtitle">Senior Realtor</div>
+								<div class="sidebar_realtor_phone"><span>call us: </span>652 345 3222 11</div>
+								<div class="realtor_link"><a href="#">+</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Property Content -->
+				<div class="col-lg-7 offset-lg-1">
+					<div class="property_content">
+						<div class="property_icons">
+							<div class="property_title">Caracteristicas especiales</div>
+							<div class="property_text property_text_1">
+								<p>{{inmueble.tipo.nombre}} para la {{getTipoAV(inmueble.tipoAV)}}</p>
+							</div>
+							<div class="property_rooms d-flex flex-sm-row flex-column align-items-start justify-content-start">
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Habitaciones</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="template/images/room_1.png" alt=""></div>
+										<div class="room_num">{{inmueble.habitaciones}}</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Baños</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="template/images/room_2.png" alt=""></div>
+										<div class="room_num">{{inmueble.banios}}</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Area</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="template/images/room_3.png" alt=""></div>
+										<div class="room_num">{{inmueble.area}} m²</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Patio</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="template/images/room_4.png" alt=""></div>
+										<div class="room_num">1</div>
+									</div>
+								</div>
+
+								<!-- Property Room Item -->
+								<div class="property_room">
+									<div class="property_room_title">Garage</div>
+									<div class="property_room_content d-flex flex-row align-items-center justify-content-start">
+										<div class="room_icon"><img src="template/images/room_5.png" alt=""></div>
+										<div class="room_num">{{inmueble.garajes}}</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- Description -->
+
+						<div class="property_description">
+							<div class="property_title">Descripcion</div>
+							<div class="property_text property_text_2">
+								<p>{{inmueble.detalles}}</p>
+							</div>
+						</div>
+
+						<!-- Additional Details -->
+
+						<div class="additional_details">
+							<div class="property_title">Detalles Adicionales</div>
+							<div class="details_container">
+								<ul>
+                  <li><span><b>UBICACION</b></span></li>
+									<li><span>Departamento: </span>{{inmueble.ciudad.departamento.nombre}}</li>
+									<li><span>Ciudad: </span>{{inmueble.ciudad.nombre}}</li>
+                  <li><span>Sector: </span>{{getZona(inmueble.zona)}}</li>
+                  <li><span>Direccion: </span>{{inmueble.direccion}}</li>
+                  <li><span>Año de construccion: </span>{{inmueble.anoconstruccion}}</li>
+				  <li><span>Antiguedad: </span>{{anio-inmueble.anoconstruccion}} años</li>
+				  <li><span><b>Numero de Matricula: </b></span>{{inmueble.numero_matricula}}</li>
+                  <li><span><b>TIPO DE CORTINAS: </b></span>{{inmueble.tipo_cortinas}}</li>
+                  <li><span><b>CODIGO DEL INMUEBLE: </b></span>{{inmueble.id}}</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- Property On Map -->
+
+						<div class="property_map">
+							<div class="property_title">Property on map</div>
+							<div class="property_map_container">
+
+								<!-- Google Map -->
+								<div id="google_map" class="google_map">
+									<div class="map_container">
+										<div id="map"></div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
